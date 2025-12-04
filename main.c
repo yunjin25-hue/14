@@ -1,28 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//실습 1 
+//실습 2
 
-int main(int argc, char *argv[])
-{
-  char* pc=NULL;
-  int i=0;
+struct Book{
+       int number;
+       char title[10];
+};
+
+int main(int argc, char *argv[]){
+  struct Book *p;
   
-  pc=(char*)malloc(100*sizeof(char));
+  p=(struct Book*)malloc(2*sizeof(struct Book));
   
-  if(pc==NULL){ //에러 핸들링 코드 
-    printf("메모리 할당 오류\n");
-    exit(1);
+  
+  if(p==NULL){
+     printf("메모리 할당 오류\n"); 
+     return;
   }
   
-  for(i=0; i<26; i++)
-  {
-      pc[i]='a'+i;
-  }
-  pc[i]=0;
-  printf("%s\n",pc);
-  free(pc);
+  p->number=1;
+  strcpy(p->title, "C programming");
   
+  (p+1)->number=2;
+  strcpy((p+1)->title, "Electronics");
+  
+  free(p);
   
   system("PAUSE");	
   return 0;
